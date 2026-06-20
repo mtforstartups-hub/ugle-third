@@ -455,10 +455,10 @@ export const Pricing = () => (
           Pricing
         </div>
         <h1 className="text-[40px] md:text-[62px] font-extrabold tracking-[-0.02em] leading-[1.04] text-ugle-slate mb-4">
-          Simple. Honest. One-time.
+          Simple. Honest. One-time*.
         </h1>
         <p className="text-[18px] md:text-[21px] text-ugle-gray max-w-2xl mx-auto leading-[1.55]">
-          Pay once, use forever. No subscriptions. No surprise charges.
+          Pay once*, use forever. No subscriptions. No surprise charges.
         </p>
       </motion.div>
 
@@ -466,21 +466,24 @@ export const Pricing = () => (
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.2 }}
-        className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto mb-32"
+        className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto mb-32"
       >
         {/* Solo */}
-        <div className="bg-white rounded-[1rem] p-10 border border-ugle-light/60 shadow-sm relative flex flex-col group">
-          <div className="font-mono text-sm tracking-widest uppercase text-ugle-gray mb-1">
+        <div className="bg-white rounded-2xl p-8 border border-ugle-light/60 shadow-sm relative flex flex-col group">
+          <div className="font-mono text-sm tracking-widest uppercase text-ugle-gray mb-3">
             Solo
           </div>
 
           <div className="mb-4">
-            <div className="flex items-baseline gap-2 mb-2">
-              <span className="text-5xl font-extrabold tracking-tight text-ugle-slate">
-                $99
+            <div className="flex items-baseline gap-2 mb-2 flex-wrap">
+              <span className="text-3xl font-extrabold tracking-tight text-ugle-gray/40 line-through">
+                $199
+              </span>
+              <span className="text-4xl font-extrabold tracking-tight text-ugle-slate">
+                $169
               </span>
               <span className="text-base font-semibold text-ugle-gray">
-                one-time
+                /Year
               </span>
             </div>
             <p className="text-ugle-gray text-[15px] leading-snug min-h-[44px]">
@@ -488,20 +491,20 @@ export const Pricing = () => (
             </p>
           </div>
 
-          <div className="space-y-4 flex-1 my-6">
+          <div className="space-y-3 flex-1 my-5">
             {[
               "Up to 2 machines (same user)",
-              "12 months of updates included. Renew $29/year.",
+              "12 months of updates included. Renew $99/year.",
               "Unlimited Library size",
               "90+ languages",
               "Clip export included",
             ].map((f, i) => (
               <div
                 key={i}
-                className="flex items-start gap-3 text-ugle-slate font-medium text-[15px]"
+                className="flex items-start gap-3 text-ugle-slate font-medium text-[14px]"
               >
                 <Check
-                  className="w-[18px] h-[18px] text-[#75C043] flex-shrink-0 mt-0.5"
+                  className="w-[16px] h-[16px] text-[#75C043] flex-shrink-0 mt-0.5"
                   strokeWidth={2.4}
                 />
                 <span>{f}</span>
@@ -509,32 +512,89 @@ export const Pricing = () => (
             ))}
           </div>
 
-          <button className="w-full bg-ugle-slate text-white font-bold py-4 px-6 rounded-[10px] transition-colors hover:bg-[#222] text-[15px]">
+          <button className="w-full bg-ugle-slate text-white font-bold py-3.5 px-6 rounded-[10px] transition-colors hover:bg-[#222] text-[14px]">
             Buy Solo Licence
           </button>
         </div>
 
+        {/* Solo Lifetime Access — Recommended */}
+        <div className="bg-ugle-slate rounded-[1rem] p-8 border border-ugle-slate shadow-xl relative flex flex-col group scale-[1.02]">
+          <div className="absolute -top-3.5 left-1/2 -translate-x-1/2">
+            <span className="bg-[#75C043] text-[#102206] font-bold text-xs px-4 py-1.5 rounded-full tracking-wide whitespace-nowrap">
+              We Recommend
+            </span>
+          </div>
+          <div className="font-mono text-sm tracking-widest uppercase text-white/50 mb-3 mt-1">
+            Solo Lifetime Access*
+          </div>
+
+          <div className="mb-4">
+            <div className="flex items-baseline gap-2 mb-2 flex-wrap">
+              <span className="text-3xl font-extrabold tracking-tight text-white/30 line-through">
+                $1999
+              </span>
+              <span className="text-4xl font-extrabold tracking-tight text-white">
+                $999
+              </span>
+            </div>
+            <p className="text-white/60 text-[15px] leading-snug min-h-[44px]">
+              Believers.
+            </p>
+          </div>
+
+          <div className="space-y-3 flex-1 my-5">
+            {[
+              "Up to 2 machines (same user)",
+              "120 months of updates included.",
+              "Unlimited Library size",
+              "90+ languages",
+              "Clip export included",
+            ].map((f, i) => (
+              <div
+                key={i}
+                className="flex items-start gap-3 text-white font-medium text-[14px]"
+              >
+                <Check
+                  className="w-[16px] h-[16px] text-[#75C043] flex-shrink-0 mt-0.5"
+                  strokeWidth={2.4}
+                />
+                <span>{f}</span>
+              </div>
+            ))}
+          </div>
+
+          <button className="w-full bg-[#75C043] text-[#102206] font-bold py-3.5 px-6 rounded-[10px] transition-colors hover:bg-[#5DA233] hover:text-white text-[14px]">
+            Buy Freedom Licence
+          </button>
+        </div>
+
         {/* Team */}
-        <div className="bg-white rounded-[1rem] p-10 border border-ugle-slate shadow-sm relative flex flex-col group">
-          <div className="font-mono text-sm tracking-widest uppercase text-ugle-gray mb-1">
+        <div className="bg-white rounded-[1rem] p-8 border border-ugle-light/60 shadow-sm relative flex flex-col group">
+          <div className="font-mono text-sm tracking-widest uppercase text-ugle-gray mb-3">
             Team
           </div>
 
           <div className="mb-4">
-            <div className="flex items-baseline gap-2 mb-2">
-              <span className="text-5xl font-extrabold tracking-tight text-ugle-slate">
-                $89
+            <div className="flex items-baseline gap-1.5 mb-1 flex-wrap">
+              <span className="text-3xl font-extrabold tracking-tight text-ugle-gray/40 line-through">
+                $169
+              </span>
+              <span className="text-4xl font-extrabold tracking-tight text-ugle-slate">
+                $149
               </span>
               <span className="text-base font-semibold text-ugle-gray">
-                /seat/year · min. 3 seats
+                /seat/year
               </span>
+            </div>
+            <div className="text-[13px] text-ugle-gray/60 font-mono mb-2">
+              min. 3 seats
             </div>
             <p className="text-ugle-gray text-[15px] leading-snug min-h-[44px]">
               Editorial teams, production companies, newsrooms.
             </p>
           </div>
 
-          <div className="space-y-4 flex-1 my-6">
+          <div className="space-y-3 flex-1 my-5">
             {[
               "Per-seat, company licence",
               "Updates included for licence duration",
@@ -544,10 +604,10 @@ export const Pricing = () => (
             ].map((f, i) => (
               <div
                 key={i}
-                className="flex items-start gap-3 text-ugle-slate font-medium text-[15px]"
+                className="flex items-start gap-3 text-ugle-slate font-medium text-[14px]"
               >
                 <Check
-                  className="w-[18px] h-[18px] text-[#75C043] flex-shrink-0 mt-0.5"
+                  className="w-[16px] h-[16px] text-[#75C043] flex-shrink-0 mt-0.5"
                   strokeWidth={2.4}
                 />
                 <span>{f}</span>
@@ -555,7 +615,7 @@ export const Pricing = () => (
             ))}
           </div>
 
-          <button className="w-full bg-[#75C043] text-[#102206] font-bold py-4 px-6 rounded-[10px] transition-colors hover:bg-[#5DA233] hover:text-white text-[15px]">
+          <button className="w-full bg-[#75C043] text-[#102206] font-bold py-3.5 px-6 rounded-[10px] transition-colors hover:bg-[#5DA233] hover:text-white text-[14px]">
             Contact for Team Pricing
           </button>
         </div>
@@ -623,6 +683,11 @@ export const Pricing = () => (
           </p>
         </div>
       </motion.div>
+
+      {/* Asterisk footnote */}
+      <p className="text-center text-[13px] text-ugle-gray/60 font-mono pt-12 pb-4 max-w-xl mx-auto border-t border-ugle-light/40">
+        *Only valid for Lifetime License Access (10 Years)
+      </p>
     </div>
   </div>
 );
