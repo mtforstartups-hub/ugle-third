@@ -208,7 +208,10 @@ export const NavBar = () => {
     if (mobileMenuOpen) {
       document.body.style.overflow = 'hidden';
     } else {
-      document.body.style.overflow = 'unset';
+      const t = setTimeout(() => {
+        document.body.style.overflow = 'unset';
+      }, 400); // Wait for exit animation
+      return () => clearTimeout(t);
     }
   }, [mobileMenuOpen]);
 
