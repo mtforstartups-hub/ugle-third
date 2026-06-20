@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { Check, Globe, ChevronDown, User, X, Search, FileVideo, FileText, Image as ImageIcon, Copy, Play, BarChart2, Share2, FolderOpen, ListFilter, Menu } from 'lucide-react';
 import { motion, AnimatePresence, useScroll, useSpring } from 'motion/react';
 import { Link, useLocation } from 'react-router-dom';
@@ -216,100 +217,105 @@ export const NavBar = () => {
   }, [mobileMenuOpen]);
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-ugle-light/60 bg-white/80 backdrop-blur-md">
-      <nav className="w-full px-6 py-4 md:px-12 flex items-center justify-between">
-        <Logo />
-        <div className="hidden md:flex items-center gap-8 font-medium text-sm text-ugle-slate">
-          <Link to="/how-it-works" className="hover:text-[#75C043] transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-px after:w-full after:origin-bottom-right after:scale-x-0 after:bg-[#75C043] after:transition-transform hover:after:origin-bottom-left hover:after:scale-x-100">How it works</Link>
-          <div className="group relative py-2">
-            <Link to="/use-cases" className="flex items-center gap-1 hover:text-[#75C043] transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-px after:w-full after:origin-bottom-right after:scale-x-0 after:bg-[#75C043] after:transition-transform hover:after:origin-bottom-left hover:after:scale-x-100">
-              Use cases <ChevronDown className="w-3 h-3 opacity-60 group-hover:rotate-180 transition-transform" />
-            </Link>
-            <div className="absolute top-10 left-1/2 -translate-x-1/2 w-48 bg-white border border-ugle-light/60 rounded-xl shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 py-2 transform group-hover:translate-y-1">
-              <Link to="/use-cases/newsrooms" className="block px-4 py-2.5 hover:bg-[#F8FAF9] hover:text-[#75C043] text-sm transition-colors">Newsrooms</Link>
-              <Link to="/use-cases/podcasts" className="block px-4 py-2.5 hover:bg-[#F8FAF9] hover:text-[#75C043] text-sm transition-colors">Podcasts</Link>
-              <Link to="/use-cases/journalists" className="block px-4 py-2.5 hover:bg-[#F8FAF9] hover:text-[#75C043] text-sm transition-colors">Journalists</Link>
+    <>
+      <header className="sticky top-0 z-50 w-full border-b border-ugle-light/60 bg-white/80 backdrop-blur-md">
+        <nav className="w-full px-6 py-4 md:px-12 flex items-center justify-between">
+          <Logo />
+          <div className="hidden md:flex items-center gap-8 font-medium text-sm text-ugle-slate">
+            <Link to="/how-it-works" className="hover:text-[#75C043] transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-px after:w-full after:origin-bottom-right after:scale-x-0 after:bg-[#75C043] after:transition-transform hover:after:origin-bottom-left hover:after:scale-x-100">How it works</Link>
+            <div className="group relative py-2">
+              <Link to="/use-cases" className="flex items-center gap-1 hover:text-[#75C043] transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-px after:w-full after:origin-bottom-right after:scale-x-0 after:bg-[#75C043] after:transition-transform hover:after:origin-bottom-left hover:after:scale-x-100">
+                Use cases <ChevronDown className="w-3 h-3 opacity-60 group-hover:rotate-180 transition-transform" />
+              </Link>
+              <div className="absolute top-10 left-1/2 -translate-x-1/2 w-48 bg-white border border-ugle-light/60 rounded-xl shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 py-2 transform group-hover:translate-y-1">
+                <Link to="/use-cases/newsrooms" className="block px-4 py-2.5 hover:bg-[#F8FAF9] hover:text-[#75C043] text-sm transition-colors">Newsrooms</Link>
+                <Link to="/use-cases/podcasts" className="block px-4 py-2.5 hover:bg-[#F8FAF9] hover:text-[#75C043] text-sm transition-colors">Podcasts</Link>
+                <Link to="/use-cases/journalists" className="block px-4 py-2.5 hover:bg-[#F8FAF9] hover:text-[#75C043] text-sm transition-colors">Journalists</Link>
+              </div>
             </div>
+            <Link to="/pricing" className="hover:text-[#75C043] transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-px after:w-full after:origin-bottom-right after:scale-x-0 after:bg-[#75C043] after:transition-transform hover:after:origin-bottom-left hover:after:scale-x-100">Pricing</Link>
           </div>
-          <Link to="/pricing" className="hover:text-[#75C043] transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-px after:w-full after:origin-bottom-right after:scale-x-0 after:bg-[#75C043] after:transition-transform hover:after:origin-bottom-left hover:after:scale-x-100">Pricing</Link>
-        </div>
-        <div className="flex items-center gap-6">
-          <Link to="/download" className="hidden sm:block text-sm font-semibold text-ugle-slate hover:text-[#75C043] transition-colors">Download</Link>
-          <Link to="/download" className="hidden md:flex items-center justify-center bg-[#1C1C1C] hover:bg-[#75C043] text-white hover:text-[#1C1C1C] font-semibold px-5 py-2.5 rounded-lg shadow-sm transition-all text-sm">Get Ugle</Link>
-          <button 
-            className="md:hidden flex items-center justify-center p-2 text-ugle-slate hover:bg-gray-100 rounded-md transition-colors"
-            onClick={() => setMobileMenuOpen(true)}
-          >
-            <Menu className="w-6 h-6" />
-          </button>
-        </div>
-      </nav>
-
-      {/* Mobile Menu Overlay */}
-      <AnimatePresence>
-        {mobileMenuOpen && (
-          <>
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.2 }}
-              className="fixed inset-0 z-[55] bg-ugle-slate/60 backdrop-blur-sm md:hidden"
-              onClick={() => setMobileMenuOpen(false)}
-            />
-            <motion.div
-              initial={{ x: "100%" }}
-              animate={{ x: 0 }}
-              exit={{ x: "100%" }}
-              transition={{ type: "spring", bounce: 0, duration: 0.4 }}
-              className="fixed inset-y-0 right-0 w-[80%] max-w-sm z-[60] bg-white shadow-2xl flex flex-col pt-6 px-6 md:hidden overflow-y-auto"
+          <div className="flex items-center gap-6">
+            <Link to="/download" className="hidden sm:block text-sm font-semibold text-ugle-slate hover:text-[#75C043] transition-colors">Download</Link>
+            <Link to="/download" className="hidden md:flex items-center justify-center bg-[#1C1C1C] hover:bg-[#75C043] text-white hover:text-[#1C1C1C] font-semibold px-5 py-2.5 rounded-lg shadow-sm transition-all text-sm">Get Ugle</Link>
+            <button 
+              className="md:hidden flex items-center justify-center p-2 text-ugle-slate hover:bg-gray-100 rounded-md transition-colors"
+              onClick={() => setMobileMenuOpen(true)}
             >
-              <div className="flex items-center justify-between mb-12">
-                <Logo />
-                <button 
-                  className="p-2 text-ugle-slate hover:bg-gray-100 rounded-md transition-colors"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  <X className="w-6 h-6" />
-                </button>
-              </div>
-              
-              <div className="flex flex-col gap-6 text-2xl font-bold text-ugle-slate tracking-tight">
-                {[
-                  { name: "Home", path: "/" },
-                  { name: "How it works", path: "/how-it-works" },
-                  { name: "Use cases", path: "/use-cases" },
-                  { name: "Pricing", path: "/pricing" },
-                  { name: "Download", path: "/download" },
-                  { name: "Blog", path: "/blog" }
-                ].map((item, i) => (
-                  <motion.div
-                    key={item.name}
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.1 + i * 0.05, duration: 0.3 }}
-                  >
-                    <Link to={item.path} className="hover:text-[#75C043] transition-colors border-b border-gray-100 pb-4 block">
-                      {item.name}
-                    </Link>
-                  </motion.div>
-                ))}
-              </div>
+              <Menu className="w-6 h-6" />
+            </button>
+          </div>
+        </nav>
+      </header>
 
-              <motion.div 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4, duration: 0.3 }}
-                className="mt-auto pb-12 pt-12"
+      {/* Mobile Menu Overlay — rendered via portal to escape sticky header stacking context */}
+      {createPortal(
+        <AnimatePresence>
+          {mobileMenuOpen && (
+            <>
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.2 }}
+                className="fixed inset-0 z-[55] bg-ugle-slate/60 backdrop-blur-sm md:hidden"
+                onClick={() => setMobileMenuOpen(false)}
+              />
+              <motion.div
+                initial={{ x: "100%" }}
+                animate={{ x: 0 }}
+                exit={{ x: "100%" }}
+                transition={{ type: "spring", bounce: 0, duration: 0.4 }}
+                className="fixed inset-y-0 right-0 w-[80%] max-w-sm z-[60] bg-white shadow-2xl flex flex-col pt-6 px-6 md:hidden overflow-y-auto"
               >
-                <Link to="/download" className="block text-center bg-[#75C043] text-white font-bold text-lg py-4 rounded-lg shadow-lg">
-                  Get Ugle Free
-                </Link>
+                <div className="flex items-center justify-between mb-12">
+                  <Logo />
+                  <button 
+                    className="p-2 text-ugle-slate hover:bg-gray-100 rounded-md transition-colors"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    <X className="w-6 h-6" />
+                  </button>
+                </div>
+                
+                <div className="flex flex-col gap-6 text-2xl font-bold text-ugle-slate tracking-tight">
+                  {[
+                    { name: "Home", path: "/" },
+                    { name: "How it works", path: "/how-it-works" },
+                    { name: "Use cases", path: "/use-cases" },
+                    { name: "Pricing", path: "/pricing" },
+                    { name: "Download", path: "/download" },
+                    { name: "Blog", path: "/blog" }
+                  ].map((item, i) => (
+                    <motion.div
+                      key={item.name}
+                      initial={{ opacity: 0, x: 20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.1 + i * 0.05, duration: 0.3 }}
+                    >
+                      <Link to={item.path} className="hover:text-[#75C043] transition-colors border-b border-gray-100 pb-4 block">
+                        {item.name}
+                      </Link>
+                    </motion.div>
+                  ))}
+                </div>
+
+                <motion.div 
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.4, duration: 0.3 }}
+                  className="mt-auto pb-12 pt-12"
+                >
+                  <Link to="/download" className="block text-center bg-[#75C043] text-white font-bold text-lg py-4 rounded-lg shadow-lg">
+                    Get Ugle Free
+                  </Link>
+                </motion.div>
               </motion.div>
-            </motion.div>
-          </>
-        )}
-      </AnimatePresence>
-    </header>
+            </>
+          )}
+        </AnimatePresence>,
+        document.body
+      )}
+    </>
   );
 };
