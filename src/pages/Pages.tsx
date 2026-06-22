@@ -327,14 +327,14 @@ export const Download = () => (
             whileTap={{ scale: 0.98 }}
             className="flex items-center justify-center gap-3 border-b-2 border-white/20 hover:border-white/60 text-white font-bold py-4 px-6 text-lg transition-colors"
           >
-            [ Join Early for macOS &darr; ]
+            [ Get Early access for macOS &darr; ]
           </motion.button>
           <motion.button
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             className="flex items-center justify-center gap-3 border-b-2 border-white/20 hover:border-white/60 text-white font-bold py-4 px-6 text-lg transition-colors"
           >
-            [ Join Early for Windows &darr; ]
+            [ Get Early access for Windows &darr; ]
           </motion.button>
         </div>
       </motion.div>
