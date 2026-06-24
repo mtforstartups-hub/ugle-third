@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "motion/react";
 import {
@@ -442,252 +442,340 @@ export const Download = () => (
   </div>
 );
 
-export const Pricing = () => (
-  <div className="bg-[#F8FAF9] min-h-screen pt-24 pb-32">
-    <div className="max-w-6xl mx-auto px-6">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        className="text-center mb-16 md:mb-20"
-      >
-        <div className="font-mono text-xs md:text-[13px] tracking-[0.14em] uppercase text-[#5DA233] font-medium mb-3">
-          Pricing
+export function Pricing() {
+  const [billing, setBilling] = useState<"monthly" | "annual">("annual");
+  const [category, setCategory] = useState<
+    "individuals" | "organisation" | "special"
+  >("individuals");
+  const isAnnual = billing === "annual";
+
+  const soloPrice = isAnnual
+    ? { main: "$169", orig: "$199", per: "/year" }
+    : { main: "$17", orig: "", per: "/month" };
+  const teamPrice = isAnnual
+    ? { main: "$149", orig: "$169", per: "/seat/year" }
+    : { main: "$15", orig: "", per: "/seat/mo" };
+
+  const categories = [
+    { id: "individuals", label: "Individuals" },
+    { id: "organisation", label: "Organisation" },
+    { id: "special", label: "Special Categories" },
+  ] as const;
+
+  // Shared feature-list renderer
+  const FeatureList = ({
+    features,
+    dark = false,
+  }: {
+    features: string[];
+    dark?: boolean;
+  }) => (
+    <div className="space-y-3 flex-1 my-5">
+      {features.map((f, i) => (
+        <div
+          key={i}
+          className={`flex items-start gap-3 font-medium text-[14px] ${dark ? "text-white" : "text-ugle-slate"}`}
+        >
+          <Check
+            className="w-[16px] h-[16px] text-[#75C043] flex-shrink-0 mt-0.5"
+            strokeWidth={2.4}
+          />
+          <span>{f}</span>
         </div>
-        <h1 className="text-[40px] md:text-[62px] font-extrabold tracking-[-0.02em] leading-[1.04] text-ugle-slate mb-4">
-          Simple. Honest. One-time*.
-        </h1>
-        <p className="text-[18px] md:text-[21px] text-ugle-gray max-w-2xl mx-auto leading-[1.55]">
-          Pay once*, use forever. No subscriptions. No surprise charges.
-        </p>
-      </motion.div>
+      ))}
+    </div>
+  );
 
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.2 }}
-        className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto mb-32"
-      >
-        {/* Solo */}
-        <div className="bg-white rounded-2xl p-8 border border-ugle-light/60 shadow-sm relative flex flex-col group">
-          <div className="font-mono text-sm tracking-widest uppercase text-ugle-gray mb-3">
-            Solo
+  return (
+    <div className="bg-[#F8FAF9] min-h-screen pt-24 pb-32">
+      <div className="max-w-6xl mx-auto px-6">
+        {/* ── Header ── */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="text-center mb-10 md:mb-12"
+        >
+          <div className="font-mono text-xs md:text-[13px] tracking-[0.14em] uppercase text-[#5DA233] font-medium mb-3">
+            Pricing
           </div>
+          <h1 className="text-[40px] md:text-[62px] font-extrabold tracking-[-0.02em] leading-[1.04] text-ugle-slate mb-4">
+            Simple. Honest. One-time*.
+          </h1>
+          <p className="text-[18px] md:text-[21px] text-ugle-gray max-w-2xl mx-auto leading-[1.55]">
+            Pay once*, use forever. No subscriptions. No surprise charges.
+          </p>
+        </motion.div>
 
-          <div className="mb-4">
-            <div className="flex items-baseline gap-2 mb-2 flex-wrap">
-              <span className="text-3xl font-extrabold tracking-tight text-ugle-gray/40 line-through">
-                $199
-              </span>
-              <span className="text-4xl font-extrabold tracking-tight text-ugle-slate">
-                $169
-              </span>
-              <span className="text-base font-semibold text-ugle-gray">
-                /Year
-              </span>
-            </div>
-            <p className="text-ugle-gray text-[15px] leading-snug min-h-[44px]">
-              Freelance journalists, independent producers, solo editors.
-            </p>
-          </div>
-
-          <div className="space-y-3 flex-1 my-5">
-            {[
-              "Up to 2 machines (same user)",
-              "12 months of updates included. Renew $99/year.",
-              "Unlimited Library size",
-              "90+ languages",
-              "Clip export included",
-            ].map((f, i) => (
-              <div
-                key={i}
-                className="flex items-start gap-3 text-ugle-slate font-medium text-[14px]"
+        {/* ── Category tabs ── */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4, delay: 0.1 }}
+          className="flex justify-center mb-8"
+        >
+          <div className="inline-flex bg-white border border-ugle-light/70 rounded-[14px] p-1.5 shadow-sm gap-1">
+            {categories.map((cat) => (
+              <button
+                key={cat.id}
+                id={`category-tab-${cat.id}`}
+                onClick={() => setCategory(cat.id)}
+                className={`px-5 py-2 rounded-[10px] text-[14px] font-semibold transition-all duration-200 whitespace-nowrap ${
+                  category === cat.id
+                    ? "bg-ugle-slate text-white shadow-sm"
+                    : "text-ugle-gray hover:text-ugle-slate hover:bg-ugle-light/40"
+                }`}
               >
-                <Check
-                  className="w-[16px] h-[16px] text-[#75C043] flex-shrink-0 mt-0.5"
-                  strokeWidth={2.4}
-                />
-                <span>{f}</span>
-              </div>
+                {cat.label}
+              </button>
             ))}
           </div>
+        </motion.div>
 
-          <button className="w-full bg-ugle-slate text-white font-bold py-3.5 px-6 rounded-[10px] transition-colors hover:bg-[#222] text-[14px]">
-            Buy Solo Licence
+        {/* ── Billing toggle ── */}
+        <motion.div
+          initial={{ opacity: 0, y: 6 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3 }}
+          className="flex items-center justify-center gap-4 mb-14"
+        >
+          <span
+            className={`text-[15px] font-semibold transition-colors ${!isAnnual ? "text-ugle-slate" : "text-ugle-gray/50"}`}
+          >
+            Monthly
+          </span>
+          <button
+            id="billing-toggle"
+            onClick={() => setBilling(isAnnual ? "monthly" : "annual")}
+            aria-pressed={isAnnual}
+            className="relative w-[52px] h-[28px] rounded-full transition-colors duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#75C043]"
+            style={{ backgroundColor: isAnnual ? "#75C043" : "#CBD5E1" }}
+          >
+            <span
+              className="absolute top-[3px] left-[3px] w-[22px] h-[22px] bg-white rounded-full shadow transition-transform duration-300"
+              style={{
+                transform: isAnnual ? "translateX(24px)" : "translateX(0)",
+              }}
+            />
           </button>
-        </div>
-
-        {/* Solo Lifetime Access — Recommended */}
-        <div className="bg-ugle-slate rounded-[1rem] p-8 border border-ugle-slate shadow-xl relative flex flex-col group scale-[1.02]">
-          <div className="absolute -top-3.5 left-1/2 -translate-x-1/2">
-            <span className="bg-[#75C043] text-[#102206] font-bold text-xs px-4 py-1.5 rounded-full tracking-wide whitespace-nowrap">
-              We Recommend
+          <div className="flex items-center gap-2">
+            <span
+              className={`text-[15px] font-semibold transition-colors ${isAnnual ? "text-ugle-slate" : "text-ugle-gray/50"}`}
+            >
+              Annual
+            </span>
+            <span className="bg-[#75C043]/15 text-[#3d7a1a] text-xs font-bold px-2.5 py-1 rounded-full tracking-wide whitespace-nowrap">
+              Save ~17%
             </span>
           </div>
-          <div className="font-mono text-sm tracking-widest uppercase text-white/50 mb-3 mt-1">
-            Solo Lifetime Access*
-          </div>
+        </motion.div>
 
-          <div className="mb-4">
-            <div className="flex items-baseline gap-2 mb-2 flex-wrap">
-              <span className="text-3xl font-extrabold tracking-tight text-white/30 line-through">
-                $1999
-              </span>
-              <span className="text-4xl font-extrabold tracking-tight text-white">
-                $999
-              </span>
+        {/* ── Shared 3-card grid (same for all categories) ── */}
+        <motion.div
+          key={category}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.35 }}
+          className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto mb-32"
+        >
+          {/* Solo */}
+          <div className="bg-white rounded-2xl p-8 border border-ugle-light/60 shadow-sm relative flex flex-col">
+            <div className="font-mono text-sm tracking-widest uppercase text-ugle-gray mb-3">
+              Solo
             </div>
-            <p className="text-white/60 text-[15px] leading-snug min-h-[44px]">
-              Believers.
-            </p>
-          </div>
-
-          <div className="space-y-3 flex-1 my-5">
-            {[
-              "Up to 2 machines (same user)",
-              "120 months of updates included.",
-              "Unlimited Library size",
-              "90+ languages",
-              "Clip export included",
-            ].map((f, i) => (
-              <div
-                key={i}
-                className="flex items-start gap-3 text-white font-medium text-[14px]"
-              >
-                <Check
-                  className="w-[16px] h-[16px] text-[#75C043] flex-shrink-0 mt-0.5"
-                  strokeWidth={2.4}
-                />
-                <span>{f}</span>
+            <div className="mb-4">
+              <div className="flex items-baseline gap-2 mb-2 flex-wrap">
+                {soloPrice.orig && (
+                  <span className="text-3xl font-extrabold tracking-tight text-ugle-gray/40 line-through">
+                    {soloPrice.orig}
+                  </span>
+                )}
+                <span className="text-4xl font-extrabold tracking-tight text-ugle-slate">
+                  {soloPrice.main}
+                </span>
+                <span className="text-base font-semibold text-ugle-gray">
+                  {soloPrice.per}
+                </span>
               </div>
-            ))}
-          </div>
-
-          <button className="w-full bg-[#75C043] text-[#102206] font-bold py-3.5 px-6 rounded-[10px] transition-colors hover:bg-[#5DA233] hover:text-white text-[14px]">
-            Buy Freedom Licence
-          </button>
-        </div>
-
-        {/* Team */}
-        <div className="bg-white rounded-[1rem] p-8 border border-ugle-light/60 shadow-sm relative flex flex-col group">
-          <div className="font-mono text-sm tracking-widest uppercase text-ugle-gray mb-3">
-            Team
-          </div>
-
-          <div className="mb-4">
-            <div className="flex items-baseline gap-1.5 mb-1 flex-wrap">
-              <span className="text-3xl font-extrabold tracking-tight text-ugle-gray/40 line-through">
-                $169
-              </span>
-              <span className="text-4xl font-extrabold tracking-tight text-ugle-slate">
-                $149
-              </span>
-              <span className="text-base font-semibold text-ugle-gray">
-                /seat/year
-              </span>
-            </div>
-            <div className="text-[13px] text-ugle-gray/60 font-mono mb-2">
-              min. 3 seats
-            </div>
-            <p className="text-ugle-gray text-[15px] leading-snug min-h-[44px]">
-              Editorial teams, production companies, newsrooms.
-            </p>
-          </div>
-
-          <div className="space-y-3 flex-1 my-5">
-            {[
-              "Per-seat, company licence",
-              "Updates included for licence duration",
-              "Unlimited Library size · 90+ languages",
-              "Priority support — 4-hour response SLA",
-              "Admin console included",
-            ].map((f, i) => (
-              <div
-                key={i}
-                className="flex items-start gap-3 text-ugle-slate font-medium text-[14px]"
-              >
-                <Check
-                  className="w-[16px] h-[16px] text-[#75C043] flex-shrink-0 mt-0.5"
-                  strokeWidth={2.4}
-                />
-                <span>{f}</span>
-              </div>
-            ))}
-          </div>
-
-          <button className="w-full bg-[#75C043] text-[#102206] font-bold py-3.5 px-6 rounded-[10px] transition-colors hover:bg-[#5DA233] hover:text-white text-[14px]">
-            Contact for Team Pricing
-          </button>
-        </div>
-      </motion.div>
-
-      <motion.div
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true, margin: "-100px" }}
-        transition={{ duration: 0.8 }}
-        className="max-w-4xl mx-auto"
-      >
-        <div className="mb-8">
-          <h2 className="text-3xl md:text-[38px] font-bold text-ugle-slate tracking-tight">
-            Questions
-          </h2>
-        </div>
-
-        <div className="flex flex-col border-t border-ugle-light/60">
-          {[
-            {
-              q: "Is there a free trial?",
-              a: "Yes. 14 days, no file limit, no credit card. At day 14, choose a licence or the app continues in read-only mode — your existing index stays searchable, with no new imports.",
-            },
-            {
-              q: "What counts as a seat?",
-              a: "One seat = one machine. Solo licences activate on up to two machines owned by the same person. Team licences are per-machine.",
-            },
-            {
-              q: "What if I reinstall my OS?",
-              a: "Deactivate from Settings > Licence, then reactivate after reinstalling. Deactivate and reactivate as many times as needed.",
-            },
-            {
-              q: "Does Ugle work offline?",
-              a: "Yes. After activation, Ugle runs entirely without internet. Transcription, indexing, and search are all local. Internet is required for initial activation and updates only.",
-            },
-            {
-              q: "Educational or non-profit pricing?",
-              a: "40% off Solo licences for verified institutions and registered non-profit news organisations. Contact pricing@ugle.ai.",
-            },
-          ].map((item, i) => (
-            <div
-              key={i}
-              className="py-5 border-b border-ugle-light/60 flex flex-col md:flex-row md:gap-8 md:items-start group"
-            >
-              <h3 className="font-bold text-[17px] text-ugle-slate md:w-1/3 mb-2 md:mb-0">
-                {item.q}
-              </h3>
-              <p className="text-[15.5px] text-ugle-gray leading-relaxed md:w-2/3">
-                {item.a}
+              {!isAnnual && (
+                <p className="text-[13px] text-ugle-gray/60 font-mono mb-1">
+                  billed monthly
+                </p>
+              )}
+              <p className="text-ugle-gray text-[15px] leading-snug min-h-[44px]">
+                Freelance journalists, independent producers, solo editors.
               </p>
             </div>
-          ))}
-        </div>
+            <FeatureList
+              features={[
+                "Up to 2 machines (same user)",
+                isAnnual
+                  ? "12 months of updates included. Renew $99/year."
+                  : "Updates included while subscribed",
+                "Unlimited Library size",
+                "90+ languages",
+                "Clip export included",
+              ]}
+            />
+            <button className="w-full bg-ugle-slate text-white font-bold py-3.5 px-6 rounded-[10px] transition-colors hover:bg-[#222] text-[14px]">
+              Buy Solo Licence
+            </button>
+          </div>
 
-        <div className="bg-white border border-ugle-light/60 rounded-[14px] p-[34px] mt-10 shadow-sm">
-          <h3 className="text-[22px] font-bold text-ugle-slate mb-2">
-            Enterprise
-          </h3>
-          <p className="text-ugle-gray text-[15.5px]">
-            Large team or air-gapped deployment? For newsroom-wide or on-premise
-            installations, contact us directly. We work with engineering and IT
-            teams.{" "}
-            <span className="font-mono text-[#5DA233]">enterprise@ugle.ai</span>
-          </p>
-        </div>
-      </motion.div>
+          {/* Solo Lifetime Access — Recommended */}
+          <div className="bg-ugle-slate rounded-[1rem] p-8 border border-ugle-slate shadow-xl relative flex flex-col scale-[1.02]">
+            <div className="absolute -top-3.5 left-1/2 -translate-x-1/2">
+              <span className="bg-[#75C043] text-[#102206] font-bold text-xs px-4 py-1.5 rounded-full tracking-wide whitespace-nowrap">
+                We Recommend
+              </span>
+            </div>
+            <div className="font-mono text-sm tracking-widest uppercase text-white/50 mb-3 mt-1">
+              Solo Lifetime Access*
+            </div>
+            <div className="mb-4">
+              <div className="flex items-baseline gap-2 mb-2 flex-wrap">
+                <span className="text-3xl font-extrabold tracking-tight text-white/30 line-through">
+                  $1999
+                </span>
+                <span className="text-4xl font-extrabold tracking-tight text-white">
+                  $999
+                </span>
+              </div>
+              <p className="text-white/50 text-[13px] font-mono mb-1">
+                one-time payment
+              </p>
+              <p className="text-white/60 text-[15px] leading-snug min-h-[44px]">
+                Believers.
+              </p>
+            </div>
+            <FeatureList
+              dark
+              features={[
+                "Up to 2 machines (same user)",
+                "120 months of updates included.",
+                "Unlimited Library size",
+                "90+ languages",
+                "Clip export included",
+              ]}
+            />
+            <button className="w-full bg-[#75C043] text-[#102206] font-bold py-3.5 px-6 rounded-[10px] transition-colors hover:bg-[#5DA233] hover:text-white text-[14px]">
+              Buy Freedom Licence
+            </button>
+          </div>
 
-      {/* Asterisk footnote */}
-      <p className="text-center text-[13px] text-ugle-gray/60 font-mono pt-12 pb-4 max-w-xl mx-auto border-t border-ugle-light/40">
-        *Only valid for Lifetime License Access (10 Years)
-      </p>
+          {/* Team */}
+          <div className="bg-white rounded-[1rem] p-8 border border-ugle-light/60 shadow-sm relative flex flex-col">
+            <div className="font-mono text-sm tracking-widest uppercase text-ugle-gray mb-3">
+              Team
+            </div>
+            <div className="mb-4">
+              <div className="flex items-baseline gap-1.5 mb-1 flex-wrap">
+                {teamPrice.orig && (
+                  <span className="text-3xl font-extrabold tracking-tight text-ugle-gray/40 line-through">
+                    {teamPrice.orig}
+                  </span>
+                )}
+                <span className="text-4xl font-extrabold tracking-tight text-ugle-slate">
+                  {teamPrice.main}
+                </span>
+                <span className="text-base font-semibold text-ugle-gray">
+                  {teamPrice.per}
+                </span>
+              </div>
+              <div className="text-[13px] text-ugle-gray/60 font-mono mb-2">
+                min. 3 seats
+              </div>
+              <p className="text-ugle-gray text-[15px] leading-snug min-h-[44px]">
+                Editorial teams, production companies, newsrooms.
+              </p>
+            </div>
+            <FeatureList
+              features={[
+                "Per-seat, company licence",
+                isAnnual
+                  ? "Updates included for licence duration"
+                  : "Updates included while subscribed",
+                "Unlimited Library size · 90+ languages",
+                "Priority support — 4-hour response SLA",
+                "Admin console included",
+              ]}
+            />
+            <button className="w-full bg-[#75C043] text-[#102206] font-bold py-3.5 px-6 rounded-[10px] transition-colors hover:bg-[#5DA233] hover:text-white text-[14px]">
+              Contact for Team Pricing
+            </button>
+          </div>
+        </motion.div>
+
+        {/* ── FAQ — always visible ── */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.8 }}
+          className="max-w-4xl mx-auto"
+        >
+          <div className="mb-8">
+            <h2 className="text-3xl md:text-[38px] font-bold text-ugle-slate tracking-tight">
+              Questions
+            </h2>
+          </div>
+          <div className="flex flex-col border-t border-ugle-light/60">
+            {[
+              {
+                q: "Is there a free trial?",
+                a: "Yes. 14 days, no file limit, no credit card. At day 14, choose a licence or the app continues in read-only mode — your existing index stays searchable, with no new imports.",
+              },
+              {
+                q: "What counts as a seat?",
+                a: "One seat = one machine. Solo licences activate on up to two machines owned by the same person. Team licences are per-machine.",
+              },
+              {
+                q: "What if I reinstall my OS?",
+                a: "Deactivate from Settings > Licence, then reactivate after reinstalling. Deactivate and reactivate as many times as needed.",
+              },
+              {
+                q: "Does Ugle work offline?",
+                a: "Yes. After activation, Ugle runs entirely without internet. Transcription, indexing, and search are all local. Internet is required for initial activation and updates only.",
+              },
+              {
+                q: "Educational or non-profit pricing?",
+                a: "40% off Solo licences for verified institutions and registered non-profit news organisations. Contact pricing@ugle.ai.",
+              },
+            ].map((item, i) => (
+              <div
+                key={i}
+                className="py-5 border-b border-ugle-light/60 flex flex-col md:flex-row md:gap-8 md:items-start"
+              >
+                <h3 className="font-bold text-[17px] text-ugle-slate md:w-1/3 mb-2 md:mb-0">
+                  {item.q}
+                </h3>
+                <p className="text-[15.5px] text-ugle-gray leading-relaxed md:w-2/3">
+                  {item.a}
+                </p>
+              </div>
+            ))}
+          </div>
+
+          <div className="bg-white border border-ugle-light/60 rounded-[14px] p-[34px] mt-10 shadow-sm">
+            <h3 className="text-[22px] font-bold text-ugle-slate mb-2">
+              Enterprise
+            </h3>
+            <p className="text-ugle-gray text-[15.5px]">
+              Large team or air-gapped deployment? For newsroom-wide or
+              on-premise installations, contact us directly. We work with
+              engineering and IT teams.{" "}
+              <span className="font-mono text-[#5DA233]">
+                enterprise@ugle.ai
+              </span>
+            </p>
+          </div>
+        </motion.div>
+
+        {/* Asterisk footnote */}
+        <p className="text-center text-[13px] text-ugle-gray/60 font-mono pt-12 pb-4 max-w-xl mx-auto border-t border-ugle-light/40 mt-12">
+          *Only valid for Lifetime License Access (10 Years)
+        </p>
+      </div>
     </div>
-  </div>
-);
+  );
+}
