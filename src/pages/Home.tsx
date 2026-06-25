@@ -16,6 +16,8 @@ import {
   ListFilter,
   Newspaper,
   Mic2,
+  ArrowRight,
+  FileSearch,
 } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import { showToast } from "../components/Shared";
@@ -301,9 +303,10 @@ export default function Home() {
             <div className="font-mono text-xs md:text-[13px] tracking-[0.14em] uppercase text-[#5DA233] font-medium mb-4">
               How it works
             </div>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-snug text-ugle-slate mb-6">
-              One Click to Connect your archive. Build a local index. Search
-              anything inside. Nothing leaves your device.
+            <h2 className="text-4xl md:text-5xl font-bold tracking-tight leading-snug text-ugle-slate mb-6">
+              <span className="text-ugle-green">One Click to Connect</span> your
+              archive. Build a local index. Search anything inside. Nothing
+              leaves your device.
             </h2>
           </div>
 
@@ -373,7 +376,7 @@ export default function Home() {
             </h2>
           </div>
 
-          <div className="flex flex-col gap-6 mb-32">
+          {/* <div className="flex flex-col gap-6 mb-32">
             {[
               {
                 title: "Newsroom editors",
@@ -418,7 +421,68 @@ export default function Home() {
                 </div>
               </Link>
             ))}
-          </div>
+          </div> */}
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1, duration: 0.5 }}
+            className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-32"
+          >
+            <Link
+              to="/use-cases/newsrooms"
+              className="group block bg-white border border-ugle-light/60 hover:border-ugle-green/50 rounded-2xl p-8 transition-all hover:shadow-[0_10px_40px_-10px_rgba(117,192,67,0.15)] relative overflow-hidden"
+            >
+              <div className="bg-white w-12 h-12 rounded-xl flex items-center justify-center border border-ugle-light shadow-sm mb-6 group-hover:scale-110 transition-transform">
+                <Newspaper className="w-6 h-6 text-ugle-slate" />
+              </div>
+              <h2 className="text-2xl font-bold mb-3 text-ugle-slate">
+                Newsroom editors
+              </h2>
+              <p className="text-ugle-gray mb-8 leading-relaxed">
+                Find the soundbite. Cut the segment. Hit the deadline.
+              </p>
+              <div className="flex items-center text-ugle-green font-semibold text-sm uppercase tracking-widest mt-auto group-hover:translate-x-2 transition-transform">
+                Read workflow <ArrowRight className="w-4 h-4 ml-2" />
+              </div>
+            </Link>
+
+            <Link
+              to="/use-cases/podcasts"
+              className="group block bg-white border border-ugle-light/60 hover:border-ugle-green/50 rounded-2xl p-8 transition-all hover:shadow-[0_10px_40px_-10px_rgba(117,192,67,0.15)] relative overflow-hidden"
+            >
+              <div className="bg-white w-12 h-12 rounded-xl flex items-center justify-center border border-ugle-light shadow-sm mb-6 group-hover:scale-110 transition-transform">
+                <Mic2 className="w-6 h-6 text-ugle-slate" />
+              </div>
+              <h2 className="text-2xl font-bold mb-3 text-ugle-slate">
+                Podcast producers
+              </h2>
+              <p className="text-ugle-gray mb-8 leading-relaxed">
+                Pull clips from 300 episodes without listening to any of them.
+              </p>
+              <div className="flex items-center text-ugle-green font-semibold text-sm uppercase tracking-widest mt-auto group-hover:translate-x-2 transition-transform">
+                Read workflow <ArrowRight className="w-4 h-4 ml-2" />
+              </div>
+            </Link>
+
+            <Link
+              to="/use-cases/journalists"
+              className="group block bg-white border border-ugle-light/60 hover:border-ugle-green/50 rounded-2xl p-8 transition-all hover:shadow-[0_10px_40px_-10px_rgba(117,192,67,0.15)] relative overflow-hidden"
+            >
+              <div className="bg-white w-12 h-12 rounded-xl flex items-center justify-center border border-ugle-light shadow-sm mb-6 group-hover:scale-110 transition-transform">
+                <FileSearch className="w-6 h-6 text-ugle-slate" />
+              </div>
+              <h2 className="text-2xl font-bold mb-3 text-ugle-slate">
+                Journalists
+              </h2>
+              <p className="text-ugle-gray mb-8 leading-relaxed">
+                A private, searchable archive of every source conversation.
+              </p>
+              <div className="flex items-center text-ugle-green font-semibold text-sm uppercase tracking-widest mt-auto group-hover:translate-x-2 transition-transform">
+                Read workflow <ArrowRight className="w-4 h-4 ml-2" />
+              </div>
+            </Link>
+          </motion.div>
 
           {/* Privacy statement */}
           <div className="mb-32 p-10 md:p-16 bg-[#1C1C1C] rounded-3xl text-white flex flex-col md:flex-row items-start md:items-center justify-between gap-10 shadow-2xl relative overflow-hidden">

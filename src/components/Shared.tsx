@@ -148,11 +148,23 @@ export const Footer = () => {
               >
                 Pricing
               </Link>
-              <Link
+              {/* <Link
                 to="/download"
                 className="hover:text-white transition-colors text-[#75C043]"
               >
                 Download
+              </Link> */}
+              <Link
+                to="/get-early-access"
+                className="hover:text-white transition-colors text-[#75C043]"
+              >
+                Get Early Access
+              </Link>
+              <Link
+                to="/request-demo"
+                className="hover:text-white transition-colors text-[#75C043]"
+              >
+                Request Demo
               </Link>
             </div>
             <div className="mt-4 flex gap-6 text-sm font-semibold text-gray-400">
@@ -350,13 +362,13 @@ export const NavBar = () => {
           </div>
           <div className="flex items-center gap-6">
             <Link
-              to="/download"
+              to="/get-early-access"
               className="hidden sm:block text-sm font-semibold text-ugle-slate hover:text-[#75C043] transition-colors"
             >
               Request Demo
             </Link>
             <Link
-              to="/download"
+              to="/get-early-access"
               className="hidden md:flex items-center justify-center bg-[#1C1C1C] hover:bg-[#75C043] text-white hover:text-[#1C1C1C] font-semibold px-5 py-2.5 rounded-lg shadow-sm transition-all text-sm"
             >
               Get Early Access
@@ -407,7 +419,7 @@ export const NavBar = () => {
                     { name: "How it works", path: "/how-it-works" },
                     { name: "Use cases", path: "/use-cases" },
                     { name: "Pricing", path: "/pricing" },
-                    { name: "Download", path: "/download" },
+                    { name: "Download", path: "/get-early-access" },
                     { name: "Blog", path: "/blog" },
                   ].map((item, i) => (
                     <motion.div

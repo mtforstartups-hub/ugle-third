@@ -442,11 +442,663 @@ export const Download = () => (
   </div>
 );
 
+export const GetEarlyAccess = () => {
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  return (
+    <div className="bg-[#F8FAF9] min-h-screen pt-24 pb-32">
+      <div className="max-w-4xl mx-auto px-6">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="max-w-2xl mb-16"
+        >
+          <div className="font-mono text-[13px] tracking-[0.14em] uppercase text-[#5DA233] font-medium mb-3">
+            Get Early Access
+          </div>
+          <h1 className="text-[40px] md:text-[62px] font-extrabold tracking-[-0.02em] leading-[1.04] text-ugle-slate mb-4">
+            Start searching your archive.
+          </h1>
+          <p className="text-[18px] md:text-[21px] text-ugle-gray leading-[1.55]">
+            Join the early access program. We are rolling out invites weekly to
+            ensure stability and performance.
+          </p>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.1, duration: 0.5 }}
+          className="bg-white rounded-[1rem] p-8 md:p-12 border border-ugle-light/60 shadow-sm"
+        >
+          {!isSubmitted ? (
+            <form
+              className="space-y-6"
+              onSubmit={(e) => {
+                e.preventDefault();
+                setIsSubmitted(true);
+              }}
+            >
+              <div className="grid md:grid-cols-2 gap-6">
+                <div className="space-y-2">
+                  <label className="block text-[15px] font-bold text-ugle-slate">
+                    First name
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    className="w-full bg-[#F8FAF9] border border-ugle-light/60 rounded-[10px] px-4 py-3 text-[15px] text-ugle-slate focus:outline-none focus:border-[#75C043] focus:ring-1 focus:ring-[#75C043] transition-all"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <label className="block text-[15px] font-bold text-ugle-slate">
+                    Last name
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    className="w-full bg-[#F8FAF9] border border-ugle-light/60 rounded-[10px] px-4 py-3 text-[15px] text-ugle-slate focus:outline-none focus:border-[#75C043] focus:ring-1 focus:ring-[#75C043] transition-all"
+                  />
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <label className="block text-[15px] font-bold text-ugle-slate">
+                  Email
+                </label>
+                <input
+                  type="email"
+                  required
+                  className="w-full bg-[#F8FAF9] border border-ugle-light/60 rounded-[10px] px-4 py-3 text-[15px] text-ugle-slate focus:outline-none focus:border-[#75C043] focus:ring-1 focus:ring-[#75C043] transition-all"
+                />
+              </div>
+
+              <div className="space-y-2">
+                <label className="block text-[15px] font-bold text-ugle-slate">
+                  Contact number
+                </label>
+                <input
+                  type="tel"
+                  required
+                  className="w-full bg-[#F8FAF9] border border-ugle-light/60 rounded-[10px] px-4 py-3 text-[15px] text-ugle-slate focus:outline-none focus:border-[#75C043] focus:ring-1 focus:ring-[#75C043] transition-all"
+                />
+              </div>
+
+              <div className="space-y-2">
+                <label className="block text-[15px] font-bold text-ugle-slate">
+                  Primary OS
+                </label>
+                <div className="grid grid-cols-2 gap-4">
+                  <label className="flex items-center gap-3 p-4 border border-ugle-light/60 rounded-[10px] cursor-pointer hover:border-[#75C043] transition-colors">
+                    <input
+                      type="radio"
+                      name="os"
+                      required
+                      className="text-[#75C043] focus:ring-[#75C043]"
+                    />
+                    <span className="text-[15px] font-medium text-ugle-slate">
+                      macOS
+                    </span>
+                  </label>
+                  <label className="flex items-center gap-3 p-4 border border-ugle-light/60 rounded-[10px] cursor-pointer hover:border-[#75C043] transition-colors">
+                    <input
+                      type="radio"
+                      name="os"
+                      required
+                      className="text-[#75C043] focus:ring-[#75C043]"
+                    />
+                    <span className="text-[15px] font-medium text-ugle-slate">
+                      Windows
+                    </span>
+                  </label>
+                </div>
+              </div>
+
+              <button
+                type="submit"
+                className="w-full bg-ugle-slate text-white font-bold py-4 px-6 rounded-[10px] transition-colors hover:bg-[#222] text-[15px] mt-4"
+              >
+                Request Access
+              </button>
+            </form>
+          ) : (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.4 }}
+              className="py-12 text-center"
+            >
+              <div className="w-16 h-16 bg-[#75C043]/10 text-[#75C043] rounded-full flex items-center justify-center mx-auto mb-6">
+                <Check className="w-8 h-8" strokeWidth={3} />
+              </div>
+              <h2 className="text-2xl font-bold text-ugle-slate mb-3">
+                Request Received
+              </h2>
+              <p className="text-ugle-gray text-lg max-w-md mx-auto">
+                Thank you for your interest. We'll be in touch soon with your
+                early access invitation.
+              </p>
+            </motion.div>
+          )}
+        </motion.div>
+      </div>
+    </div>
+  );
+};
+
+export const RequestDemo = () => {
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  return (
+    <div className="bg-[#1C1C1C] min-h-screen pt-24 pb-32">
+      <div className="max-w-6xl mx-auto px-6">
+        <div className="grid md:grid-cols-2 gap-16 md:gap-24">
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5 }}
+            className="text-white"
+          >
+            <div className="font-mono text-[13px] tracking-[0.14em] uppercase text-[#75C043] font-medium mb-3">
+              Enterprise
+            </div>
+            <h1 className="text-[40px] md:text-[56px] font-extrabold tracking-[-0.02em] leading-[1.04] mb-6">
+              Let's talk workflow.
+            </h1>
+            <p className="text-[18px] md:text-[21px] text-white/70 leading-[1.55] mb-12">
+              See how Ugle transforms archive search for editorial teams,
+              newsrooms, and production companies.
+            </p>
+
+            <div className="space-y-8">
+              {[
+                {
+                  title: "Custom Deployment",
+                  desc: "MDM packaging, air-gapped support, and priority IT onboarding.",
+                },
+                {
+                  title: "Team Licencing",
+                  desc: "Centralized administration and consolidated billing.",
+                },
+                {
+                  title: "Workflow Integration",
+                  desc: "Best practices for deploying local-first search across an established editorial team.",
+                },
+              ].map((item, i) => (
+                <div key={i} className="flex gap-4">
+                  <Check
+                    className="w-6 h-6 text-[#75C043] flex-shrink-0 mt-1"
+                    strokeWidth={2.4}
+                  />
+                  <div>
+                    <h3 className="font-bold text-[17px] mb-1">{item.title}</h3>
+                    <p className="text-[15px] text-white/60 leading-relaxed">
+                      {item.desc}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="bg-[#2A2A2A] rounded-[1rem] p-8 md:p-10 border border-white/10 shadow-2xl relative"
+          >
+            {!isSubmitted ? (
+              <form
+                className="space-y-5 text-white"
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  setIsSubmitted(true);
+                }}
+              >
+                <div className="grid md:grid-cols-2 gap-5">
+                  <div className="space-y-2">
+                    <label className="block text-[14px] font-semibold text-white/80">
+                      First name
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      className="w-full bg-[#1C1C1C] border border-white/10 rounded-[8px] px-4 py-3 text-[15px] focus:outline-none focus:border-[#75C043] transition-all"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <label className="block text-[14px] font-semibold text-white/80">
+                      Last name
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      className="w-full bg-[#1C1C1C] border border-white/10 rounded-[8px] px-4 py-3 text-[15px] focus:outline-none focus:border-[#75C043] transition-all"
+                    />
+                  </div>
+                </div>
+
+                <div className="space-y-2">
+                  <label className="block text-[14px] font-semibold text-white/80">
+                    Work email
+                  </label>
+                  <input
+                    type="email"
+                    required
+                    className="w-full bg-[#1C1C1C] border border-white/10 rounded-[8px] px-4 py-3 text-[15px] focus:outline-none focus:border-[#75C043] transition-all"
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <label className="block text-[14px] font-semibold text-white/80">
+                    Company name
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    className="w-full bg-[#1C1C1C] border border-white/10 rounded-[8px] px-4 py-3 text-[15px] focus:outline-none focus:border-[#75C043] transition-all"
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <label className="block text-[14px] font-semibold text-white/80">
+                    Team size
+                  </label>
+                  <select
+                    required
+                    className="w-full bg-[#1C1C1C] border border-white/10 rounded-[8px] px-4 py-3 text-[15px] focus:outline-none focus:border-[#75C043] transition-all appearance-none text-white"
+                  >
+                    <option value="">Select team size...</option>
+                    <option>1-5 editors</option>
+                    <option>6-20 editors</option>
+                    <option>21-50 editors</option>
+                    <option>50+ editors</option>
+                  </select>
+                </div>
+
+                <div className="space-y-2">
+                  <label className="block text-[14px] font-semibold text-white/80">
+                    How are you currently handling archive search?
+                  </label>
+                  <textarea
+                    rows={3}
+                    required
+                    className="w-full bg-[#1C1C1C] border border-white/10 rounded-[8px] px-4 py-3 text-[15px] focus:outline-none focus:border-[#75C043] transition-all resize-none"
+                  ></textarea>
+                </div>
+
+                <button
+                  type="submit"
+                  className="w-full bg-[#75C043] text-[#102206] font-bold py-4 px-6 rounded-[8px] transition-colors hover:bg-[#5DA233] hover:text-white text-[15px] mt-4"
+                >
+                  Request Demo
+                </button>
+              </form>
+            ) : (
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.4 }}
+                className="py-12 text-center text-white flex flex-col items-center justify-center h-full min-h-[400px]"
+              >
+                <div className="w-16 h-16 bg-[#75C043]/20 text-[#75C043] rounded-full flex items-center justify-center mx-auto mb-6">
+                  <Check className="w-8 h-8" strokeWidth={3} />
+                </div>
+                <h2 className="text-2xl font-bold mb-3">Request Received</h2>
+                <p className="text-white/60 text-lg max-w-sm mx-auto">
+                  Thank you for your interest. Our enterprise team will be in
+                  touch shortly to schedule your demo.
+                </p>
+              </motion.div>
+            )}
+          </motion.div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// ── Pricing card components ───────────────────────────────────────────────────
+
+function PriceCard({
+  title,
+  badge,
+  dark = false,
+  description,
+  features,
+  priceLabel,
+  priceMain,
+  vatNote,
+  primaryBtn,
+}: {
+  title: string;
+  badge?: string;
+  dark?: boolean;
+  description: string;
+  features: string[];
+  priceLabel: string;
+  priceMain: string;
+  vatNote?: string;
+  primaryBtn: string;
+}) {
+  const bg = dark
+    ? "bg-ugle-slate border-ugle-slate"
+    : "bg-white border-ugle-light/60";
+  const titleCol = dark ? "text-white" : "text-ugle-slate";
+  const descCol = dark ? "text-white/55" : "text-ugle-gray";
+  const dividerCol = dark ? "border-white/10" : "border-ugle-light/60";
+  const priceLabelCol = dark ? "text-white/50" : "text-ugle-gray";
+  const priceMainCol = dark ? "text-white" : "text-ugle-slate";
+  const vatCol = dark ? "text-white/35" : "text-ugle-gray/55";
+  const checkCol = dark ? "text-[#75C043]" : "text-[#5DA233]";
+  const featureTextCol = dark ? "text-white/70" : "text-ugle-slate";
+
+  return (
+    <div
+      className={`rounded-2xl border shadow-sm relative flex flex-col ${bg}`}
+    >
+      {badge && (
+        <div className="absolute -top-3.5 left-6">
+          <span className="bg-ugle-green text-[#102206] font-bold text-xs px-4 py-1.5 rounded-full tracking-wide whitespace-nowrap shadow">
+            {badge}
+          </span>
+        </div>
+      )}
+
+      {/* ── Title + Description ── */}
+      <div className={`p-6 pb-5 ${badge ? "pt-8" : ""}`}>
+        <h3
+          className={`text-[20px] font-extrabold tracking-tight leading-tight mb-2 ${titleCol}`}
+        >
+          {title}
+        </h3>
+        <p className={`text-[14px] leading-snug ${descCol}`}>{description}</p>
+      </div>
+
+      {/* ── Features ── */}
+      <div
+        className={`px-6 pb-5 flex-1 space-y-2.5 border-t ${dividerCol} pt-5`}
+      >
+        {features.map((f, i) => (
+          <div
+            key={i}
+            className={`flex items-start gap-2.5 text-[13.5px] font-medium ${featureTextCol}`}
+          >
+            <Check
+              className={`w-[14px] h-[14px] shrink-0 mt-[3px] ${checkCol}`}
+              strokeWidth={2.5}
+            />
+            <span>{f}</span>
+          </div>
+        ))}
+      </div>
+
+      {/* ── Price row (space-between) ── */}
+      <div
+        className={`px-6 py-4 border-t ${dividerCol} flex items-center justify-between gap-4`}
+      >
+        <div
+          className={`text-[13px] font-medium leading-snug ${priceLabelCol}`}
+        >
+          {priceLabel}
+        </div>
+        <div className="text-right">
+          <span className="line-through text-ugle-gray/35">$199</span>
+          <div
+            className={`text-[32px] font-extrabold tracking-tight leading-none ${priceMainCol}`}
+          >
+            {priceMain}
+          </div>
+          {vatNote && (
+            <div className={`text-[12px] mt-0.5 ${vatCol}`}>{vatNote}</div>
+          )}
+        </div>
+      </div>
+
+      {/* ── CTA Button ── */}
+      <div className={`px-6 pb-6 pt-3`}>
+        <button
+          className={`w-full py-3 rounded-[10px] font-bold text-[14px] transition-all ${
+            dark
+              ? "bg-ugle-green text-[#102206] hover:bg-[#5DA233] hover:text-white"
+              : "bg-ugle-slate text-white hover:bg-[#222]"
+          }`}
+        >
+          {primaryBtn}
+        </button>
+      </div>
+    </div>
+  );
+}
+
+function SoloCard({
+  isAnnual,
+  soloPrice,
+}: {
+  isAnnual: boolean;
+  soloPrice: { main: string; orig: string; per: string };
+}) {
+  return (
+    <PriceCard
+      title="Solo"
+      description="Freelance journalists, independent producers, solo editors."
+      features={[
+        "Up to 2 machines (same user)",
+        isAnnual
+          ? "12 months of updates. Renew at $99/year."
+          : "Updates included while subscribed",
+        "Unlimited Library size",
+        "90+ languages",
+        "Clip export included",
+      ]}
+      priceLabel={isAnnual ? "per user, per year" : "per user, per month"}
+      priceMain={soloPrice.main}
+      vatNote="incl. VAT US $15.22"
+      primaryBtn="Buy Solo Licence"
+    />
+  );
+}
+
+function LifetimeCard() {
+  return (
+    <PriceCard
+      title="Solo Lifetime Access*"
+      badge="We Recommend"
+      dark
+      description="Believers. Pay once, use forever — no renewal, ever."
+      features={[
+        "Up to 2 machines (same user)",
+        "120 months of updates included",
+        "Unlimited Library size",
+        "90+ languages",
+        "Clip export included",
+      ]}
+      priceLabel="one-time payment"
+      priceMain="$999"
+      vatNote="incl. VAT US $15.22"
+      primaryBtn="Buy Freedom Licence"
+    />
+  );
+}
+
+function TeamCard({
+  isAnnual,
+  teamPrice,
+}: {
+  isAnnual: boolean;
+  teamPrice: { main: string; orig: string; per: string };
+}) {
+  return (
+    <PriceCard
+      title="Team"
+      description="Editorial teams, production companies, newsrooms."
+      features={[
+        "Per-seat, company licence",
+        isAnnual
+          ? "Updates included for licence duration"
+          : "Updates included while subscribed",
+        "Unlimited Library size · 90+ languages",
+        "Priority support — 4-hour response SLA",
+        "Admin console included",
+      ]}
+      priceLabel={isAnnual ? "per seat, per year" : "per seat, per month"}
+      priceMain={teamPrice.main}
+      vatNote="incl. VAT US $15.22"
+      primaryBtn="Contact for Team Pricing"
+    />
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+
+function NonCommercialPanel() {
+  return (
+    <div className="max-w-2xl mx-auto mb-32">
+      <div className="bg-white border border-ugle-light/60 rounded-2xl shadow-sm overflow-hidden">
+        {/* Header band */}
+        <div className="bg-ugle-slate px-8 py-7">
+          <div className="font-mono text-xs tracking-[0.14em] uppercase text-[#75C043] mb-2">
+            Non-commercial licence
+          </div>
+          <h2 className="text-[26px] font-extrabold text-white tracking-tight leading-tight">
+            Using Ugle for personal, non-earning work?
+          </h2>
+        </div>
+
+        {/* Body */}
+        <div className="px-8 py-7 space-y-5">
+          <p className="text-[15px] text-ugle-gray leading-relaxed">
+            Individuals using eligible Ugle products without earning commercial
+            benefits can use Ugle for free.
+          </p>
+
+          <div className="space-y-3">
+            {[
+              "Personal documentary or archival projects",
+              "Academic research (non-institutional)",
+              "Community journalism — no paid distribution",
+              "Creative hobbyists with no commercial output",
+            ].map((item, i) => (
+              <div
+                key={i}
+                className="flex items-start gap-3 text-[14px] font-medium text-ugle-slate"
+              >
+                <Check
+                  className="w-[14px] h-[14px] shrink-0 mt-[3px] text-[#5DA233]"
+                  strokeWidth={2.5}
+                />
+                <span>{item}</span>
+              </div>
+            ))}
+          </div>
+
+          <div className="border-t border-ugle-light/60 pt-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <div>
+              <div className="text-[13px] text-ugle-gray mb-0.5">Price</div>
+              <div className="text-[32px] font-extrabold text-ugle-slate tracking-tight leading-none">
+                Free
+              </div>
+              <div className="text-[12px] text-ugle-gray/55 mt-0.5">
+                subject to eligibility review
+              </div>
+            </div>
+            <a
+              href="mailto:pricing@ugle.ai"
+              className="inline-flex items-center justify-center px-7 py-3 bg-ugle-slate text-white font-bold text-[14px] rounded-[10px] hover:bg-[#222] transition-colors"
+            >
+              Apply for free access
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function EducationPanel() {
+  return (
+    <div className="max-w-2xl mx-auto mb-32">
+      <div className="bg-white border border-ugle-light/60 rounded-2xl shadow-sm overflow-hidden">
+        {/* Header band */}
+        <div className="bg-ugle-slate px-8 py-7">
+          <div className="font-mono text-xs tracking-[0.14em] uppercase text-[#75C043] mb-2">
+            Education licence
+          </div>
+          <h2 className="text-[26px] font-extrabold text-white tracking-tight leading-tight">
+            Students &amp; instructors at accredited institutions
+          </h2>
+        </div>
+
+        {/* Body */}
+        <div className="px-8 py-7 space-y-5">
+          <p className="text-[15px] text-ugle-gray leading-relaxed">
+            Education licences are free for currently enrolled students and
+            teaching staff at accredited academic institutions. Verification and
+            approval required.
+          </p>
+
+          <div className="space-y-3">
+            {[
+              "Currently enrolled students",
+              "Full-time & part-time instructors / faculty",
+              "Journalism schools & media programmes",
+              "Accredited universities & colleges",
+            ].map((item, i) => (
+              <div
+                key={i}
+                className="flex items-start gap-3 text-[14px] font-medium text-ugle-slate"
+              >
+                <Check
+                  className="w-[14px] h-[14px] shrink-0 mt-[3px] text-[#5DA233]"
+                  strokeWidth={2.5}
+                />
+                <span>{item}</span>
+              </div>
+            ))}
+          </div>
+
+          {/* Verification note */}
+          <div className="bg-[#F8FAF9] border border-ugle-light/70 rounded-xl px-5 py-4 text-[13px] text-ugle-gray leading-relaxed">
+            <span className="font-semibold text-ugle-slate">
+              Verification required.
+            </span>{" "}
+            You'll need to submit proof of enrollment or employment at an
+            accredited institution. Approvals are typically processed within 2
+            business days.
+          </div>
+
+          <div className="border-t border-ugle-light/60 pt-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <div>
+              <div className="text-[13px] text-ugle-gray mb-0.5">Price</div>
+              <div className="text-[32px] font-extrabold text-ugle-slate tracking-tight leading-none">
+                Free
+              </div>
+              <div className="text-[12px] text-ugle-gray/55 mt-0.5">
+                pending verification & approval
+              </div>
+            </div>
+            <a
+              href="mailto:education@ugle.ai"
+              className="inline-flex items-center justify-center px-7 py-3 bg-ugle-slate text-white font-bold text-[14px] rounded-[10px] hover:bg-[#222] transition-colors"
+            >
+              Apply for free access
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+
 export function Pricing() {
   const [billing, setBilling] = useState<"monthly" | "annual">("annual");
   const [category, setCategory] = useState<
-    "individuals" | "organisation" | "special"
+    "individuals" | "organisation" | "non-commercial" | "education"
   >("individuals");
+  const showBilling = category === "individuals" || category === "organisation";
   const isAnnual = billing === "annual";
 
   const soloPrice = isAnnual
@@ -457,34 +1109,11 @@ export function Pricing() {
     : { main: "$15", orig: "", per: "/seat/mo" };
 
   const categories = [
-    { id: "individuals", label: "Individuals" },
     { id: "organisation", label: "Organisation" },
-    { id: "special", label: "Special Categories" },
+    { id: "individuals", label: "Individuals" },
+    { id: "non-commercial", label: "Non-commercial" },
+    { id: "education", label: "Education" },
   ] as const;
-
-  // Shared feature-list renderer
-  const FeatureList = ({
-    features,
-    dark = false,
-  }: {
-    features: string[];
-    dark?: boolean;
-  }) => (
-    <div className="space-y-3 flex-1 my-5">
-      {features.map((f, i) => (
-        <div
-          key={i}
-          className={`flex items-start gap-3 font-medium text-[14px] ${dark ? "text-white" : "text-ugle-slate"}`}
-        >
-          <Check
-            className="w-[16px] h-[16px] text-[#75C043] flex-shrink-0 mt-0.5"
-            strokeWidth={2.4}
-          />
-          <span>{f}</span>
-        </div>
-      ))}
-    </div>
-  );
 
   return (
     <div className="bg-[#F8FAF9] min-h-screen pt-24 pb-32">
@@ -512,21 +1141,50 @@ export function Pricing() {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, delay: 0.1 }}
-          className="flex justify-center mb-8"
+          className="mb-6 flex flex-col items-center"
         >
-          <div className="inline-flex bg-white border border-ugle-light/70 rounded-[14px] p-1.5 shadow-sm gap-1">
+          {/* Desktop: single outer border wraps all tabs */}
+          <div className="hidden sm:inline-flex border border-ugle-light rounded-lg p-1 gap-0.5">
             {categories.map((cat) => (
               <button
                 key={cat.id}
                 id={`category-tab-${cat.id}`}
                 onClick={() => setCategory(cat.id)}
-                className={`px-5 py-2 rounded-[10px] text-[14px] font-semibold transition-all duration-200 whitespace-nowrap ${
+                className={`px-4 py-1.5 rounded-lg text-base font-semibold whitespace-nowrap transition-colors duration-200 ${
                   category === cat.id
-                    ? "bg-ugle-slate text-white shadow-sm"
-                    : "text-ugle-gray hover:text-ugle-slate hover:bg-ugle-light/40"
+                    ? "border border-ugle-green text-ugle-slate"
+                    : "border border-transparent text-ugle-gray hover:text-ugle-slate"
                 }`}
               >
                 {cat.label}
+                {(cat.id === "non-commercial" || cat.id === "education") && (
+                  <span className="ml-1.5 text-[11px] font-bold text-[#5DA233]">
+                    Free
+                  </span>
+                )}
+              </button>
+            ))}
+          </div>
+
+          {/* Mobile: each tab has its own border */}
+          <div className="flex sm:hidden flex-wrap gap-2">
+            {categories.map((cat) => (
+              <button
+                key={`m-${cat.id}`}
+                id={`category-tab-mobile-${cat.id}`}
+                onClick={() => setCategory(cat.id)}
+                className={`px-4 py-2 rounded-lg text-[13.5px] font-semibold whitespace-nowrap transition-colors duration-200 border ${
+                  category === cat.id
+                    ? "border-ugle-green text-ugle-slate"
+                    : "border-ugle-light text-ugle-gray hover:text-ugle-slate"
+                }`}
+              >
+                {cat.label}
+                {(cat.id === "non-commercial" || cat.id === "education") && (
+                  <span className="ml-1.5 text-[11px] font-bold text-[#5DA233]">
+                    Free
+                  </span>
+                )}
               </button>
             ))}
           </div>
@@ -537,173 +1195,62 @@ export function Pricing() {
           initial={{ opacity: 0, y: 6 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3 }}
-          className="flex items-center justify-center gap-4 mb-14"
+          className={`mb-12 flex justify-center transition-opacity duration-200 ${
+            showBilling ? "block opacity-100" : "hidden"
+          }`}
         >
-          <span
-            className={`text-[15px] font-semibold transition-colors ${!isAnnual ? "text-ugle-slate" : "text-ugle-gray/50"}`}
-          >
-            Monthly
-          </span>
-          <button
-            id="billing-toggle"
-            onClick={() => setBilling(isAnnual ? "monthly" : "annual")}
-            aria-pressed={isAnnual}
-            className="relative w-[52px] h-[28px] rounded-full transition-colors duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#75C043]"
-            style={{ backgroundColor: isAnnual ? "#75C043" : "#CBD5E1" }}
-          >
-            <span
-              className="absolute top-[3px] left-[3px] w-[22px] h-[22px] bg-white rounded-full shadow transition-transform duration-300"
-              style={{
-                transform: isAnnual ? "translateX(24px)" : "translateX(0)",
-              }}
-            />
-          </button>
-          <div className="flex items-center gap-2">
-            <span
-              className={`text-[15px] font-semibold transition-colors ${isAnnual ? "text-ugle-slate" : "text-ugle-gray/50"}`}
+          <div className="inline-flex border border-ugle-light rounded-lg p-1 gap-0.5">
+            <button
+              id="billing-annual"
+              onClick={() => setBilling("annual")}
+              className={`flex items-center gap-2 px-4 py-1.5 rounded-lg text-base font-semibold whitespace-nowrap transition-colors duration-200 ${
+                isAnnual
+                  ? "border border-ugle-green text-ugle-slate"
+                  : "border border-transparent text-ugle-gray hover:text-ugle-slate"
+              }`}
             >
-              Annual
-            </span>
-            <span className="bg-[#75C043]/15 text-[#3d7a1a] text-xs font-bold px-2.5 py-1 rounded-full tracking-wide whitespace-nowrap">
-              Save ~17%
-            </span>
+              Annual billing
+              <span className="text-[11px] font-bold text-[#5DA233]">
+                save ~17%
+              </span>
+            </button>
+            <button
+              id="billing-monthly"
+              onClick={() => setBilling("monthly")}
+              className={`px-4 py-1.5 rounded-lg text-[13.5px] font-semibold whitespace-nowrap transition-colors duration-200 ${
+                !isAnnual
+                  ? "border border-ugle-green text-ugle-slate"
+                  : "border border-transparent text-ugle-gray hover:text-ugle-slate"
+              }`}
+            >
+              Monthly billing
+            </button>
           </div>
         </motion.div>
 
-        {/* ── Shared 3-card grid (same for all categories) ── */}
+        {/* ── Content area — switches by category ── */}
         <motion.div
           key={category}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.35 }}
-          className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto mb-32"
         >
-          {/* Solo */}
-          <div className="bg-white rounded-2xl p-8 border border-ugle-light/60 shadow-sm relative flex flex-col">
-            <div className="font-mono text-sm tracking-widest uppercase text-ugle-gray mb-3">
-              Solo
-            </div>
-            <div className="mb-4">
-              <div className="flex items-baseline gap-2 mb-2 flex-wrap">
-                {soloPrice.orig && (
-                  <span className="text-3xl font-extrabold tracking-tight text-ugle-gray/40 line-through">
-                    {soloPrice.orig}
-                  </span>
-                )}
-                <span className="text-4xl font-extrabold tracking-tight text-ugle-slate">
-                  {soloPrice.main}
-                </span>
-                <span className="text-base font-semibold text-ugle-gray">
-                  {soloPrice.per}
-                </span>
-              </div>
-              {!isAnnual && (
-                <p className="text-[13px] text-ugle-gray/60 font-mono mb-1">
-                  billed monthly
-                </p>
-              )}
-              <p className="text-ugle-gray text-[15px] leading-snug min-h-[44px]">
-                Freelance journalists, independent producers, solo editors.
-              </p>
-            </div>
-            <FeatureList
-              features={[
-                "Up to 2 machines (same user)",
-                isAnnual
-                  ? "12 months of updates included. Renew $99/year."
-                  : "Updates included while subscribed",
-                "Unlimited Library size",
-                "90+ languages",
-                "Clip export included",
-              ]}
-            />
-            <button className="w-full bg-ugle-slate text-white font-bold py-3.5 px-6 rounded-[10px] transition-colors hover:bg-[#222] text-[14px]">
-              Buy Solo Licence
-            </button>
-          </div>
+          {category === "non-commercial" ? (
+            <NonCommercialPanel />
+          ) : category === "education" ? (
+            <EducationPanel />
+          ) : (
+            <div className="grid md:grid-cols-3 gap-6 max-w-7xl mx-auto mb-32 items-start">
+              {/* ── Solo card ── */}
+              <SoloCard isAnnual={isAnnual} soloPrice={soloPrice} />
 
-          {/* Solo Lifetime Access — Recommended */}
-          <div className="bg-ugle-slate rounded-[1rem] p-8 border border-ugle-slate shadow-xl relative flex flex-col scale-[1.02]">
-            <div className="absolute -top-3.5 left-1/2 -translate-x-1/2">
-              <span className="bg-[#75C043] text-[#102206] font-bold text-xs px-4 py-1.5 rounded-full tracking-wide whitespace-nowrap">
-                We Recommend
-              </span>
-            </div>
-            <div className="font-mono text-sm tracking-widest uppercase text-white/50 mb-3 mt-1">
-              Solo Lifetime Access*
-            </div>
-            <div className="mb-4">
-              <div className="flex items-baseline gap-2 mb-2 flex-wrap">
-                <span className="text-3xl font-extrabold tracking-tight text-white/30 line-through">
-                  $1999
-                </span>
-                <span className="text-4xl font-extrabold tracking-tight text-white">
-                  $999
-                </span>
-              </div>
-              <p className="text-white/50 text-[13px] font-mono mb-1">
-                one-time payment
-              </p>
-              <p className="text-white/60 text-[15px] leading-snug min-h-[44px]">
-                Believers.
-              </p>
-            </div>
-            <FeatureList
-              dark
-              features={[
-                "Up to 2 machines (same user)",
-                "120 months of updates included.",
-                "Unlimited Library size",
-                "90+ languages",
-                "Clip export included",
-              ]}
-            />
-            <button className="w-full bg-[#75C043] text-[#102206] font-bold py-3.5 px-6 rounded-[10px] transition-colors hover:bg-[#5DA233] hover:text-white text-[14px]">
-              Buy Freedom Licence
-            </button>
-          </div>
+              {/* ── Solo Lifetime card ── */}
+              <LifetimeCard />
 
-          {/* Team */}
-          <div className="bg-white rounded-[1rem] p-8 border border-ugle-light/60 shadow-sm relative flex flex-col">
-            <div className="font-mono text-sm tracking-widest uppercase text-ugle-gray mb-3">
-              Team
+              {/* ── Team card ── */}
+              <TeamCard isAnnual={isAnnual} teamPrice={teamPrice} />
             </div>
-            <div className="mb-4">
-              <div className="flex items-baseline gap-1.5 mb-1 flex-wrap">
-                {teamPrice.orig && (
-                  <span className="text-3xl font-extrabold tracking-tight text-ugle-gray/40 line-through">
-                    {teamPrice.orig}
-                  </span>
-                )}
-                <span className="text-4xl font-extrabold tracking-tight text-ugle-slate">
-                  {teamPrice.main}
-                </span>
-                <span className="text-base font-semibold text-ugle-gray">
-                  {teamPrice.per}
-                </span>
-              </div>
-              <div className="text-[13px] text-ugle-gray/60 font-mono mb-2">
-                min. 3 seats
-              </div>
-              <p className="text-ugle-gray text-[15px] leading-snug min-h-[44px]">
-                Editorial teams, production companies, newsrooms.
-              </p>
-            </div>
-            <FeatureList
-              features={[
-                "Per-seat, company licence",
-                isAnnual
-                  ? "Updates included for licence duration"
-                  : "Updates included while subscribed",
-                "Unlimited Library size · 90+ languages",
-                "Priority support — 4-hour response SLA",
-                "Admin console included",
-              ]}
-            />
-            <button className="w-full bg-[#75C043] text-[#102206] font-bold py-3.5 px-6 rounded-[10px] transition-colors hover:bg-[#5DA233] hover:text-white text-[14px]">
-              Contact for Team Pricing
-            </button>
-          </div>
+          )}
         </motion.div>
 
         {/* ── FAQ — always visible ── */}
