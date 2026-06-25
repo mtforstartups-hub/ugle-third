@@ -322,20 +322,24 @@ export const Download = () => (
         </p>
 
         <div className="flex flex-col sm:flex-row gap-6 mb-24">
-          <motion.button
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            className="flex items-center justify-center gap-3 border-b-2 border-white/20 hover:border-white/60 text-white font-bold py-4 px-6 text-lg transition-colors"
-          >
-            [ Get Early access for macOS &darr; ]
-          </motion.button>
-          <motion.button
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            className="flex items-center justify-center gap-3 border-b-2 border-white/20 hover:border-white/60 text-white font-bold py-4 px-6 text-lg transition-colors"
-          >
-            [ Get Early access for Windows &darr; ]
-          </motion.button>
+          <Link to="/get-early-access">
+            <motion.button
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="flex items-center justify-center gap-3 border-b-2 border-white/20 hover:border-white/60 text-white font-bold py-4 px-6 text-lg transition-colors w-full"
+            >
+              [ Get Early access for macOS &darr; ]
+            </motion.button>
+          </Link>
+          <Link to="/get-early-access">
+            <motion.button
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="flex items-center justify-center gap-3 border-b-2 border-white/20 hover:border-white/60 text-white font-bold py-4 px-6 text-lg transition-colors w-full"
+            >
+              [ Get Early access for Windows &darr; ]
+            </motion.button>
+          </Link>
         </div>
       </motion.div>
 

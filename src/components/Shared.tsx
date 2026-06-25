@@ -362,7 +362,7 @@ export const NavBar = () => {
           </div>
           <div className="flex items-center gap-6">
             <Link
-              to="/get-early-access"
+              to="/request-demo"
               className="hidden sm:block text-sm font-semibold text-ugle-slate hover:text-[#75C043] transition-colors"
             >
               Request Demo
